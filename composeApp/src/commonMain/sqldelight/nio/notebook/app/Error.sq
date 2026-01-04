@@ -1,0 +1,22 @@
+CREATE TABLE errors (
+id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+message TEXT NOT NULL,
+type TEXT NOT NULL,
+priority TEXT NOT NULL,
+source TEXT NOT NULL,
+throwable TEXT,
+timestamp INTEGER NOT NULL
+);
+
+
+selectAll:
+SELECT * FROM errors ORDER BY timestamp DESC;
+
+
+insertError:
+INSERT INTO errors(message, type, priority, source, throwable, timestamp)
+VALUES ?;
+
+
+clear:
+DELETE FROM errors;
