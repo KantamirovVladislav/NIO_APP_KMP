@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="greeting">Hello, world!</string>
+    <string name="welcome_message">Welcome, %s!</string>
+    <string name="next">Next</string>
+    <string name="get_started">Get started</string>
+    <string name="dir_status_idle">Choose a folder</string>
+    <string name="dir_status_checking">Checking access…</string>
+    <string name="dir_status_ok">Folder доступен</string> <!-- можешь сделать EN -->
+    <string name="dir_status_not_exists">Folder doesn't exist</string>
+    <string name="dir_status_not_directory">Selected path is not a folder</string>
+    <string name="dir_status_not_readable">No read access</string>
+    <string name="dir_status_not_writable">No write access</string>
+    <string name="dir_status_error">Failed to check folder access</string>
+</resources>
