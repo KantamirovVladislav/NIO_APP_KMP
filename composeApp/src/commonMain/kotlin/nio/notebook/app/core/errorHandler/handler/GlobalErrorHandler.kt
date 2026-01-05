@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import nio.notebook.app.core.errorHandler.dto.toErrorEntity
 import nio.notebook.app.core.errorHandler.model.ErrorEntity
 import nio.notebook.app.core.errorHandler.handler.ErrorHandler
 import nio.notebook.app.core.errorHandler.repository.ErrorRepository
@@ -38,5 +39,22 @@ class GlobalErrorHandler(
 
 
         _errors.tryEmit(error)
+    }
+
+    override suspend fun emit(error: Throwable) {
+        Napier.e(error.message.toString(), throwable = error, tag = "throwable")
+
+        val dtoError  = error.toErrorEntity()
+
+        scope.launch {
+            try {
+                repo.insert(dtoError)
+            } catch (t: Throwable) {
+                Napier.e("Failed to persist error: ${t.message}")
+            }
+        }
+
+
+        _errors.tryEmit(dtoError)
     }
 }

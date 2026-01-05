@@ -5,5 +5,6 @@ import nio.notebook.app.core.errorHandler.model.ErrorEntity
 
 interface ErrorHandler {
     suspend fun emit(error: ErrorEntity)
+    suspend fun emit(error: Throwable)
     val errorsFlow: SharedFlow<ErrorEntity>
 }
