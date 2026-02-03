@@ -32,19 +32,21 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation("androidx.documentfile:documentfile:1.1.0")
 
             // SqlDelight
             implementation(libs.android.driver)
+
+
         }
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(libs.runtime)
+            implementation(libs.foundation)
+            implementation(libs.material3)
+            implementation(libs.ui)
+            implementation(libs.components.resources)
+            implementation(libs.jetbrains.ui.tooling.preview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
@@ -72,6 +74,12 @@ kotlin {
 
             // Enables FileKit dialogs with Composable utilities
             implementation(libs.filekit.dialogs.compose)
+
+//            implementation("androidx.compose.material3.adaptive:adaptive:1.3.0-alpha05")
+//            implementation("androidx.compose.material3.adaptive:adaptive-layout:1.3.0-alpha05")
+//            implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.3.0-alpha05")
+
+            implementation(libs.material.icons.extended)
         }
         nativeMain.dependencies {
             //SQLDelight
@@ -118,7 +126,7 @@ android {
 }
 
 dependencies {
-    debugImplementation(compose.uiTooling)
+    debugImplementation(libs.ui.tooling)
 }
 
 compose.desktop {

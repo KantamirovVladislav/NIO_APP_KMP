@@ -21,11 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import io.github.vinceglb.filekit.FileKit
 import io.github.vinceglb.filekit.dialogs.openDirectoryPicker
 import io.github.vinceglb.filekit.path
 import nio.notebook.app.domain.model.DirectoryAccessStatus
 import nio.notebook.app.presentation.common.FilePathPresenter
+import nio.notebook.app.presentation.navigation.AppRouter
 import nio_app.composeapp.generated.resources.Res
 import nio_app.composeapp.generated.resources.app_name
 import nio_app.composeapp.generated.resources.dir_status_idle
@@ -34,9 +36,11 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun DirectorySelectorScreen(
     viewModel: DirectorySelectorViewModel = koinViewModel(),
+    navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     val uiState = viewModel.uiState.collectAsState()
+    val nextScreen = viewModel.screen.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.loadAndCheckRootDirectory()
@@ -49,6 +53,12 @@ fun DirectorySelectorScreen(
                 directory = uiState.value.selected,
             )
             viewModel.onDirectoryPicked(dir)
+        }
+    }
+
+    LaunchedEffect(nextScreen.value){
+        if (nextScreen.value){
+            navController.navigate(AppRouter.Registration.route)
         }
     }
 
