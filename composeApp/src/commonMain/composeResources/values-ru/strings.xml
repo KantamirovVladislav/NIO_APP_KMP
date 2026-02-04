@@ -13,9 +13,14 @@
     <string name="dir_status_not_writable">Нет доступа на запись</string>
     <string name="dir_status_error">Не удалось проверить доступ к папке</string>
     <string name="reg_label">Зарегистрируйтесь бесплатно.</string>
+    <string name="auth_label">Войдите в свой аккаунт.</string>
     <string name="reg_sub_label">Храните свои знания прямо сейчас.</string>
     <string name="reg_already_have_account">Уже имеете аккаунт?</string>
-    <string name="reg_sign_in">Войти</string>
+    <string name="auth_dont_have_account">Не имеете аккаунта?</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="auth_remember_me">Запомнить меня</string>
+    <string name="reg_sign_up">Зарегистрироваться</string>
+    <string name="auth_sign_in">Войти</string>
     <string name="continue_with_google">Продолжить с Google</string>
     <string name="continue_with_vk_id">Продолжить с VK ID</string>
     <string name="password_strength_very_weak">Сложность пароля: Очень слабый</string>

@@ -1,17 +1,21 @@
-package nio.notebook.app.presentation.screens.regScreen
+package nio.notebook.app.presentation.screens.authScreen
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Login
-import androidx.compose.material.icons.outlined.Login
 import androidx.compose.material3.*
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -23,25 +27,19 @@ import androidx.compose.ui.unit.dp
 import com.example.compose.NIOTheme
 import nio.notebook.app.presentation.common.EmailViewChecker
 import nio.notebook.app.presentation.common.GoogleAuthView
-import nio.notebook.app.presentation.common.PasswordViewChecker
-import nio.notebook.app.presentation.common.PasswordViewCheckerV2
-import nio.notebook.app.presentation.common.UserNameViewChecker
+import nio.notebook.app.presentation.common.SimplePasswordView
 import nio.notebook.app.presentation.common.VkAuthView
-import nio_app.composeapp.generated.resources.Res
-import nio_app.composeapp.generated.resources.app_logo
-import nio_app.composeapp.generated.resources.auth_sign_in
-import nio_app.composeapp.generated.resources.compose_multiplatform
-import nio_app.composeapp.generated.resources.reg_already_have_account
-import nio_app.composeapp.generated.resources.reg_label
-import nio_app.composeapp.generated.resources.reg_sign_up
-import nio_app.composeapp.generated.resources.reg_sub_label
+import nio.notebook.app.presentation.screens.regScreen.MobileRegistrationScreen
+import nio_app.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MobileRegistrationScreen(
+fun MobileAuthorizationScreen(
     modifier: Modifier = Modifier
 ) {
+    var rememberMe by rememberSaveable { mutableStateOf(true) }
+
     Scaffold(modifier = modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxSize()) {
             Box(
@@ -88,7 +86,7 @@ fun MobileRegistrationScreen(
                         Spacer(modifier = Modifier.height(24.dp))
 
                         Text(
-                            text = stringResource(Res.string.reg_label),
+                            text = stringResource(Res.string.auth_label),
                             style = MaterialTheme.typography.headlineMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -102,25 +100,35 @@ fun MobileRegistrationScreen(
 
                         Spacer(modifier = Modifier.height(24.dp))
 
-                        UserNameViewChecker(
-                            {}
-                        )
-
-                        Spacer(modifier = Modifier.height(4.dp))
-
                         EmailViewChecker(
                             {}
                         )
 
                         Spacer(modifier = Modifier.height(4.dp))
 
-                        PasswordViewChecker({})
+                        SimplePasswordView({})
+
+                        Spacer(modifier = Modifier.height(3.dp))
+
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Start,
+                        ) {
+                            Checkbox(checked = true, onCheckedChange = {
+                                rememberMe = !rememberMe
+                            }, modifier = Modifier.size(24.dp).scale(0.8f))
+                            Spacer(modifier = Modifier.width(3.dp))
+                            Text(
+                                style = MaterialTheme.typography.bodyMedium,
+                                text = stringResource(Res.string.auth_remember_me),
+                            )
+                        }
 
                         Spacer(modifier = Modifier.height(24.dp))
 
                         Button(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth().height(44.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(text = stringResource(Res.string.reg_sign_up))
+                                Text(text = stringResource(Res.string.auth_sign_in))
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Icon(imageVector = Icons.AutoMirrored.Outlined.Login, contentDescription = null)
                             }
@@ -133,13 +141,13 @@ fun MobileRegistrationScreen(
                             horizontalArrangement = Arrangement.Center
                         ) {
                             Text(
-                                text = stringResource(Res.string.reg_already_have_account),
+                                text = stringResource(Res.string.auth_dont_have_account),
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold
                             )
                             Spacer(modifier = Modifier.width(2.dp))
                             Text(
-                                text = stringResource(Res.string.auth_sign_in),
+                                text = stringResource(Res.string.reg_sign_up),
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary,
@@ -147,7 +155,42 @@ fun MobileRegistrationScreen(
                             )
                         }
 
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Text(
+                                text = stringResource(Res.string.forgot_password),
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            HorizontalDivider(
+                                modifier = Modifier.weight(1f),
+                                thickness = 2.dp,
+                                color = MaterialTheme.colorScheme.surfaceDim
+                            )
+
+                            Text(text = "or", modifier = Modifier.padding(horizontal = 8.dp))
+
+                            HorizontalDivider(
+                                modifier = Modifier.weight(1f),
+                                thickness = 2.dp,
+                                color = MaterialTheme.colorScheme.surfaceDim
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(16.dp))
 
                         GoogleAuthView({})
 
@@ -156,7 +199,6 @@ fun MobileRegistrationScreen(
                         VkAuthView({})
                     }
                 }
-
             }
         }
     }
@@ -165,8 +207,5 @@ fun MobileRegistrationScreen(
 @Preview(locale = "EN", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun RegPreview() {
-    NIOTheme {
-        MobileRegistrationScreen()
-    }
-
+    NIOTheme {  MobileAuthorizationScreen() }
 }

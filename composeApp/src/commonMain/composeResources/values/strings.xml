@@ -13,9 +13,14 @@
     <string name="dir_status_not_writable">No write access</string>
     <string name="dir_status_error">Failed to check folder access</string>
     <string name="reg_label">Sign up for free.</string>
+    <string name="auth_label">Sign in to your account.</string>
     <string name="reg_sub_label">Store your knowledge right now.</string>
     <string name="reg_already_have_account">Already have an account?</string>
-    <string name="reg_sign_in">Sing in.</string>
+    <string name="auth_dont_have_account">Don't have an account?</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="auth_remember_me">Remember me</string>
+    <string name="reg_sign_up">Sign up</string>
+    <string name="auth_sign_in">Sing in.</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="continue_with_vk_id">Continue with VK ID</string>
     <string name="password_strength_very_weak">Password strength: Very weak</string>
