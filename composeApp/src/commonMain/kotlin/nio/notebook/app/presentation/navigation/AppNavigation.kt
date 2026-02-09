@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 import nio.notebook.app.core.errorHandler.ui.ErrorViewPosition
 import nio.notebook.app.core.errorHandler.ui.ViewErrorHandler
 import nio.notebook.app.data.storage.SettingsDataStore
+import nio.notebook.app.presentation.screens.authScreen.MobileAuthorizationScreen
 import nio.notebook.app.presentation.screens.directorySelector.DirectorySelectorScreen
 import nio.notebook.app.presentation.screens.onBoarding.OnBoardingScreen
 import nio.notebook.app.presentation.screens.regScreen.MobileRegistrationScreen
@@ -35,10 +36,6 @@ fun AppNavigation() {
     val navController = rememberNavController()
     val settingsDataStore = koinInject<SettingsDataStore>()
 
-
-
-
-
     NavHost(
         navController = navController,
         startDestination = if (!settingsDataStore.getEntryOnBoarding()) AppRouter.Onboarding.route else AppRouter.DirectorySelector.route
@@ -62,8 +59,17 @@ fun AppNavigation() {
             AppRouter.Registration.route
         ) {
             NIOTheme {
-                MobileRegistrationScreen()
+                MobileRegistrationScreen(navController = navController)
             }
+        }
+
+        composable(
+            AppRouter.Login.route
+        ) {
+            NIOTheme {
+                MobileAuthorizationScreen(navController = navController)
+            }
+
         }
     }
 }

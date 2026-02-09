@@ -58,7 +58,7 @@ fun DirectorySelectorScreen(
 
     LaunchedEffect(nextScreen.value){
         if (nextScreen.value){
-            navController.navigate(AppRouter.Registration.route)
+            navController.navigate(AppRouter.Login.route)
         }
     }
 

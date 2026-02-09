@@ -1,6 +1,7 @@
 package nio.notebook.app.presentation.screens.authScreen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,11 +25,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.compose.NIOTheme
 import nio.notebook.app.presentation.common.EmailViewChecker
 import nio.notebook.app.presentation.common.GoogleAuthView
 import nio.notebook.app.presentation.common.SimplePasswordView
 import nio.notebook.app.presentation.common.VkAuthView
+import nio.notebook.app.presentation.navigation.AppRouter
 import nio.notebook.app.presentation.screens.regScreen.MobileRegistrationScreen
 import nio_app.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.painterResource
@@ -36,6 +40,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MobileAuthorizationScreen(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     var rememberMe by rememberSaveable { mutableStateOf(true) }
@@ -151,7 +156,10 @@ fun MobileAuthorizationScreen(
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary,
-                                textDecoration = TextDecoration.Underline
+                                textDecoration = TextDecoration.Underline,
+                                modifier = Modifier.clickable{
+                                    navController.navigate(AppRouter.Registration.route)
+                                }
                             )
                         }
 
@@ -207,5 +215,5 @@ fun MobileAuthorizationScreen(
 @Preview(locale = "EN", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun RegPreview() {
-    NIOTheme {  MobileAuthorizationScreen() }
+    NIOTheme {  MobileAuthorizationScreen(rememberNavController()) }
 }

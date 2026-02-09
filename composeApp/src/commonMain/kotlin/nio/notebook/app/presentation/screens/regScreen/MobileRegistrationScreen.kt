@@ -2,7 +2,11 @@ package nio.notebook.app.presentation.screens.regScreen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -20,6 +24,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.compose.NIOTheme
 import nio.notebook.app.presentation.common.EmailViewChecker
 import nio.notebook.app.presentation.common.GoogleAuthView
@@ -27,6 +33,7 @@ import nio.notebook.app.presentation.common.PasswordViewChecker
 import nio.notebook.app.presentation.common.PasswordViewCheckerV2
 import nio.notebook.app.presentation.common.UserNameViewChecker
 import nio.notebook.app.presentation.common.VkAuthView
+import nio.notebook.app.presentation.navigation.AppRouter
 import nio_app.composeapp.generated.resources.Res
 import nio_app.composeapp.generated.resources.app_logo
 import nio_app.composeapp.generated.resources.auth_sign_in
@@ -40,6 +47,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MobileRegistrationScreen(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Scaffold(modifier = modifier.fillMaxSize()) {
@@ -77,7 +85,9 @@ fun MobileRegistrationScreen(
                     shape = RoundedCornerShape(corner = CornerSize(32.dp)),
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
                 ) {
-                    Column(modifier = Modifier.fillMaxWidth().padding(12.dp)) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth().padding(12.dp)
+                    ) {
                         Icon(
                             painterResource(Res.drawable.app_logo),
                             contentDescription = "App logo",
@@ -143,7 +153,10 @@ fun MobileRegistrationScreen(
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary,
-                                textDecoration = TextDecoration.Underline
+                                textDecoration = TextDecoration.Underline,
+                                modifier = Modifier.clickable {
+                                    navController.navigate(AppRouter.Login.route)
+                                }
                             )
                         }
 
@@ -166,7 +179,7 @@ fun MobileRegistrationScreen(
 @Composable
 fun RegPreview() {
     NIOTheme {
-        MobileRegistrationScreen()
+        MobileRegistrationScreen(rememberNavController())
     }
 
 }
