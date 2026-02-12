@@ -38,7 +38,9 @@ kotlin {
             // SqlDelight
             implementation(libs.android.driver)
 
+            implementation(libs.ktor.client.okhttp)
 
+            implementation(libs.kotlinx.coroutines.android)
         }
         commonMain.dependencies {
             implementation(libs.runtime)
@@ -80,6 +82,16 @@ kotlin {
 //            implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.3.0-alpha05")
 
             implementation(libs.material.icons.extended)
+
+
+            implementation(libs.ktor.client.core)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.encoding)
         }
         nativeMain.dependencies {
             //SQLDelight
@@ -87,6 +99,9 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
