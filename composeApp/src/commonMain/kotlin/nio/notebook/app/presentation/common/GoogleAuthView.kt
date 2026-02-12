@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material3.Icon
@@ -29,8 +30,9 @@ fun GoogleAuthView(
     modifier: Modifier = Modifier
 ) {
     OutlinedButton(
+        shape = RoundedCornerShape(12.dp),
         onClick = onClick,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

@@ -20,7 +20,6 @@ actual fun PlatformFile.child(name: String): PlatformFile {
             val dirDoc = DocumentFile.fromTreeUri(FileKit.context, af.uri)
                 ?: error("Invalid tree uri: ${af.uri}")
 
-            // если файл уже есть — используем его, иначе создаём
             val doc = dirDoc.findFile(name) ?: dirDoc.createFile(mime, name)
             ?: error("Can't create '$name' in $dirDoc")
 

@@ -1,0 +1,252 @@
+package nio.notebook.app.presentation.screens.authScreen
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Login
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import nio.notebook.app.presentation.common.EmailViewChecker
+import nio.notebook.app.presentation.common.GoogleAuthView
+import nio.notebook.app.presentation.common.SimplePasswordView
+import nio.notebook.app.presentation.common.VkAuthView
+import nio.notebook.app.presentation.navigation.AppRouter
+import nio_app.composeapp.generated.resources.Res
+import nio_app.composeapp.generated.resources.app_logo
+import nio_app.composeapp.generated.resources.app_name
+import nio_app.composeapp.generated.resources.auth_dont_have_account
+import nio_app.composeapp.generated.resources.auth_label
+import nio_app.composeapp.generated.resources.auth_remember_me
+import nio_app.composeapp.generated.resources.auth_sign_in
+import nio_app.composeapp.generated.resources.forgot_password
+import nio_app.composeapp.generated.resources.reg_sign_up
+import nio_app.composeapp.generated.resources.reg_sub_label
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+
+@Composable
+fun ExtendedAuthorizationScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
+    var rememberMe by rememberSaveable { mutableStateOf(true) }
+    Surface(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        color = MaterialTheme.colorScheme.background,
+        shape = RoundedCornerShape(32.dp)
+    ) {
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            containerColor = Color.Transparent
+        ) { padding ->
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+            ) {
+                BoxWithConstraints(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .padding(6.dp)
+                        .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(32.dp))
+                ) {
+                    val showAppName = (maxHeight > 700.dp) || (maxWidth > 710.dp)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            painterResource(Res.drawable.app_logo),
+                            contentDescription = "App logo",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(64.dp)
+                        )
+
+                        Spacer(Modifier.width(8.dp))
+
+                        AnimatedVisibility(
+                            visible = showAppName,
+                            enter = fadeIn(),
+                            exit = fadeOut()
+                        ) {
+                            Text(
+                                text = stringResource(Res.string.app_name),
+                                style = MaterialTheme.typography.headlineSmall,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+
+
+                    Column(
+                        modifier = Modifier.fillMaxSize().padding(horizontal = 86.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = stringResource(Res.string.auth_label),
+                            style = MaterialTheme.typography.headlineMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        Text(
+                            text = stringResource(Res.string.reg_sub_label),
+                            style = MaterialTheme.typography.titleSmall
+                        )
+
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        EmailViewChecker(
+                            {}
+                        )
+
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        SimplePasswordView({})
+
+                        Spacer(modifier = Modifier.height(18.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Checkbox(
+                                checked = rememberMe,
+                                onCheckedChange = { rememberMe = !rememberMe },
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .scale(0.8f)
+                            )
+                            Spacer(modifier = Modifier.width(3.dp))
+                            Text(
+                                text = stringResource(Res.string.auth_remember_me),
+                                style = MaterialTheme.typography.bodyMedium,
+                            )
+
+                            Spacer(modifier = Modifier.weight(1f))
+
+                            Text(
+                                text = stringResource(Res.string.forgot_password),
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+
+
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        Button(
+                            onClick = { /*TODO*/ },
+                            modifier = Modifier.fillMaxWidth().height(52.dp),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(text = stringResource(Res.string.auth_sign_in))
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Icon(imageVector = Icons.AutoMirrored.Outlined.Login, contentDescription = null)
+                            }
+
+                        }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            HorizontalDivider(
+                                modifier = Modifier.weight(1f),
+                                thickness = 2.dp,
+                                color = MaterialTheme.colorScheme.surfaceDim
+                            )
+
+                            Text(text = "or", modifier = Modifier.padding(horizontal = 8.dp))
+
+                            HorizontalDivider(
+                                modifier = Modifier.weight(1f),
+                                thickness = 2.dp,
+                                color = MaterialTheme.colorScheme.surfaceDim
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            GoogleAuthView({}, modifier = Modifier.weight(1f).height(52.dp))
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            VkAuthView({}, modifier = Modifier.weight(1f).height(52.dp))
+                        }
+
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Text(
+                                text = stringResource(Res.string.auth_dont_have_account),
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Spacer(modifier = Modifier.width(2.dp))
+                            Text(
+                                text = stringResource(Res.string.reg_sign_up),
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary,
+                                textDecoration = TextDecoration.Underline,
+                                modifier = Modifier.clickable {
+                                    navController.navigate(AppRouter.Registration.route)
+                                }
+                            )
+                        }
+                    }
+                }
+
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .padding(6.dp)
+                        .background(MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(32.dp))
+                )
+            }
+        }
+    }
+}
+
+@Preview(locale = "EN", uiMode = UI_MODE_NIGHT_YES, widthDp = 1500, heightDp = 1000)
+@Composable
+fun ExtendedAuthPreview() {
+    ExtendedAuthorizationScreen(navController = rememberNavController())
+}

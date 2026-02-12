@@ -55,7 +55,7 @@ fun UserNameViewChecker(
             modifier = Modifier.fillMaxWidth(),
             placeholder = { Text("my name") },
             leadingIcon = { Icon(Icons.Outlined.AccountCircle, contentDescription = null) },
-            shape = RoundedCornerShape(32.dp),
+            shape = RoundedCornerShape(12.dp),
             singleLine = true,
             isError = showError,
             supportingText = {

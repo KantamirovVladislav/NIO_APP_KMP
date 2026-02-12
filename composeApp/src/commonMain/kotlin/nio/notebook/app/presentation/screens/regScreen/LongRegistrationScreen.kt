@@ -1,8 +1,5 @@
-package nio.notebook.app.presentation.screens.authScreen
+package nio.notebook.app.presentation.screens.regScreen
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,7 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -25,24 +21,23 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import nio.notebook.app.presentation.common.EmailViewChecker
 import nio.notebook.app.presentation.common.GoogleAuthView
-import nio.notebook.app.presentation.common.SimplePasswordView
+import nio.notebook.app.presentation.common.PasswordViewChecker
+import nio.notebook.app.presentation.common.UserNameViewChecker
 import nio.notebook.app.presentation.common.VkAuthView
 import nio.notebook.app.presentation.navigation.AppRouter
 import nio_app.composeapp.generated.resources.Res
 import nio_app.composeapp.generated.resources.app_logo
 import nio_app.composeapp.generated.resources.app_name
-import nio_app.composeapp.generated.resources.auth_dont_have_account
-import nio_app.composeapp.generated.resources.auth_label
-import nio_app.composeapp.generated.resources.auth_remember_me
 import nio_app.composeapp.generated.resources.auth_sign_in
-import nio_app.composeapp.generated.resources.forgot_password
+import nio_app.composeapp.generated.resources.reg_already_have_account
+import nio_app.composeapp.generated.resources.reg_label
 import nio_app.composeapp.generated.resources.reg_sign_up
 import nio_app.composeapp.generated.resources.reg_sub_label
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun LongAuthorizationScreen(
+fun LongRegistrationScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -53,14 +48,12 @@ fun LongAuthorizationScreen(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color.Transparent
     ) { padding ->
-
-        BoxWithConstraints(
+        Box(
             modifier = Modifier
                 .fillMaxHeight()
                 .padding(6.dp)
                 .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(32.dp))
         ) {
-            val showAppName = (maxHeight > 666.dp) || (maxWidth > 710.dp)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(horizontal = 6.dp)
@@ -74,17 +67,11 @@ fun LongAuthorizationScreen(
 
                 Spacer(Modifier.width(8.dp))
 
-                AnimatedVisibility(
-                    visible = showAppName,
-                    enter = fadeIn(),
-                    exit = fadeOut()
-                ) {
-                    Text(
-                        text = stringResource(Res.string.app_name),
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+                Text(
+                    text = stringResource(Res.string.app_name),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold
+                )
             }
 
 
@@ -94,7 +81,7 @@ fun LongAuthorizationScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = stringResource(Res.string.auth_label),
+                    text = stringResource(Res.string.reg_label),
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold
                 )
@@ -108,43 +95,21 @@ fun LongAuthorizationScreen(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
+                Spacer(modifier = Modifier.height(24.dp))
+
+                UserNameViewChecker(
+                    {}
+                )
+
+                Spacer(modifier = Modifier.height(4.dp))
+
                 EmailViewChecker(
                     {}
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
 
-                SimplePasswordView({})
-
-                Spacer(modifier = Modifier.height(18.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Checkbox(
-                        checked = rememberMe,
-                        onCheckedChange = { rememberMe = !rememberMe },
-                        modifier = Modifier
-                            .size(24.dp)
-                            .scale(0.8f)
-                    )
-                    Spacer(modifier = Modifier.width(3.dp))
-                    Text(
-                        text = stringResource(Res.string.auth_remember_me),
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-
-                    Spacer(modifier = Modifier.weight(1f))
-
-                    Text(
-                        text = stringResource(Res.string.forgot_password),
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
-
+                PasswordViewChecker({})
 
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -154,14 +119,38 @@ fun LongAuthorizationScreen(
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = stringResource(Res.string.auth_sign_in))
+                        Text(text = stringResource(Res.string.reg_sign_up))
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(imageVector = Icons.AutoMirrored.Outlined.Login, contentDescription = null)
                     }
 
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = stringResource(Res.string.reg_already_have_account),
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Text(
+                        text = stringResource(Res.string.auth_sign_in),
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        textDecoration = TextDecoration.Underline,
+                        modifier = Modifier.clickable {
+                            navController.navigate(AppRouter.Login.route)
+                        }
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(24.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -196,37 +185,13 @@ fun LongAuthorizationScreen(
 
                     VkAuthView({}, modifier = Modifier.weight(1f).height(52.dp))
                 }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = stringResource(Res.string.auth_dont_have_account),
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.width(2.dp))
-                    Text(
-                        text = stringResource(Res.string.reg_sign_up),
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
-                        textDecoration = TextDecoration.Underline,
-                        modifier = Modifier.clickable {
-                            navController.navigate(AppRouter.Registration.route)
-                        }
-                    )
-                }
             }
         }
     }
 }
 
-@Preview(locale = "EN", uiMode = UI_MODE_NIGHT_YES, widthDp = 800, heightDp = 1000)
+@Preview(locale = "EN", uiMode = UI_MODE_NIGHT_YES, widthDp = 1500, heightDp = 1000)
 @Composable
-fun LongAuthPreview() {
-    LongAuthorizationScreen(navController = rememberNavController())
+fun LongRegPreview() {
+    LongRegistrationScreen(navController = rememberNavController())
 }

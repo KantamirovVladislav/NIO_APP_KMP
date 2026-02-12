@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Nio app</string>
     <string name="greeting">Hello, world!</string>
     <string name="welcome_message">Welcome, %s!</string>
     <string name="next">Next</string>
@@ -20,9 +20,9 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="auth_remember_me">Remember me</string>
     <string name="reg_sign_up">Sign up</string>
-    <string name="auth_sign_in">Sing in.</string>
-    <string name="continue_with_google">Continue with Google</string>
-    <string name="continue_with_vk_id">Continue with VK ID</string>
+    <string name="auth_sign_in">Sing in</string>
+    <string name="continue_with_google">Google</string>
+    <string name="continue_with_vk_id">VK ID</string>
     <string name="password_strength_very_weak">Password strength: Very weak</string>
     <string name="password_strength_weak">Password strength: Weak</string>
     <string name="password_strength_medium">Password strength: Medium</string>

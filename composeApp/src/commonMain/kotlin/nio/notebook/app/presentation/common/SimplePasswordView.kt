@@ -74,7 +74,7 @@ fun SimplePasswordView(
                 }
             },
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            shape = RoundedCornerShape(32.dp),
+            shape = RoundedCornerShape(12.dp),
             singleLine = true,
             isError = touched && password.isNotEmpty() && !isValid,
             keyboardOptions = KeyboardOptions(

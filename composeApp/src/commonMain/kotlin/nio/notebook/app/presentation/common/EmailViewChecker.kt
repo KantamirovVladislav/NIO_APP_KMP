@@ -74,7 +74,7 @@ fun EmailViewChecker(
             modifier = Modifier.fillMaxWidth(),
             placeholder = { Text("example@gmail.com") },
             leadingIcon = { Icon(Icons.Outlined.Email, contentDescription = null) },
-            shape = RoundedCornerShape(32.dp),
+            shape = RoundedCornerShape(12.dp),
             singleLine = true,
             isError = showError,
             supportingText = {

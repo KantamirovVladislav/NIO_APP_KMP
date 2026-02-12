@@ -1,7 +1,11 @@
 package nio.notebook.app
 
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowSize
 import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberWindowState
 import nio.notebook.app.core.errorHandler.db.platformModule
 import nio.notebook.app.core.errorHandler.di.errorModule
 import nio.notebook.app.di.viewModelModule
@@ -27,11 +31,16 @@ fun main() = application {
 
     }
 
+    val state = rememberWindowState(size = DpSize(1200.dp, 770.dp))
+
     Window(
+        state = state,
         onCloseRequest = ::exitApplication,
         title = "NIO_APP",
         icon = painterResource(Res.drawable.app_logo),
     ) {
+        val window = this.window
+        window.minimumSize  = java.awt.Dimension(400, 620)
         AppNavigation()
     }
 }

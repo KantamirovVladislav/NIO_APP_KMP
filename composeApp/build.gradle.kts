@@ -77,11 +77,9 @@ kotlin {
             // Enables FileKit dialogs with Composable utilities
             implementation(libs.filekit.dialogs.compose)
 
-//            implementation("androidx.compose.material3.adaptive:adaptive:1.3.0-alpha05")
-//            implementation("androidx.compose.material3.adaptive:adaptive-layout:1.3.0-alpha05")
-//            implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.3.0-alpha05")
-
             implementation(libs.material.icons.extended)
+
+            implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.3.0-alpha04")
 
 
             implementation(libs.ktor.client.core)

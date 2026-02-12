@@ -200,11 +200,11 @@ fun MobileAuthorizationScreen(
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        GoogleAuthView({})
+                        GoogleAuthView({}, modifier = Modifier.fillMaxWidth())
 
                         Spacer(modifier = Modifier.height(2.dp))
 
-                        VkAuthView({})
+                        VkAuthView({}, modifier = Modifier.fillMaxWidth())
                     }
                 }
             }
